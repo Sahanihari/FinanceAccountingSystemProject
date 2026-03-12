@@ -1,0 +1,77 @@
+﻿<div class="modal fade" id="customerModal">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5>Customer</h5>
+            </div>
+
+            <div class="modal-body">
+
+                <input type="hidden" id="CustomerId" name="CustomerId" />
+
+
+
+                <div class="form-group">
+                    <label>Name</label>
+                    <input id="CustomerName" name="Name" class="form-control" required />
+                    <span class="text-danger" id="CustomerNameError"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label>Email</label>
+                    <input id="CustomerEmail" name="Email" class="form-control" required type="email" />
+                    <span class="text-danger" id="CustomerEmailError"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label>Contact</label>
+                    <input id="CustomerContact" name="ContactNumber" class="form-control" required />
+                    <span class="text-danger" id="CustomerContactError"></span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label>Address</label>
+                    <select id="CustomerAddressId" name="AddressId" class="form-control" required>
+                        <option value="">Select Address</option>
+                        @if (ViewBag.AddressList != null)
+                        {
+                            foreach (var addr in ViewBag.AddressList)
+                            {
+                                <option value="@addr.AddressId">
+                                    @if (addr != null)
+                                    {
+                                        @($"{addr.Street}, {addr.City}, {addr.Country}")
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">No Address</span>
+                                    }
+                                </option>
+                            }
+                        }
+                    </select>
+                    <span class="text-danger" id="CustomerAddressIdError"></span>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button class="btn btn-success"
+                        onclick="saveCustomer()">
+                    Save
+                </button>
+
+                <button class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Close
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>

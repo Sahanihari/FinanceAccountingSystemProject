@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+<div class="container mt-4">
+    <h2>Dashboard</h2>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Customers</h5>
+                    <p class="card-text display-6">@ViewBag.CustomerCount</p>
+                    <a href="/Customer/Index" class="btn btn-primary">View Customers</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Suppliers</h5>
+                    <p class="card-text display-6">@ViewBag.SupplierCount</p>
+                    <a href="/Supplier/Index" class="btn btn-primary">View Suppliers</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Invoices</h5>
+                    <p class="card-text display-6">@ViewBag.InvoiceCount</p>
+                    <a href="/Invoice/Index" class="btn btn-primary">View Invoices</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

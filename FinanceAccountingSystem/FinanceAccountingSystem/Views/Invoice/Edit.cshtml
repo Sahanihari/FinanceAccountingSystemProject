@@ -1,0 +1,87 @@
+@model FinanceAccountingSystem.Models.Invoice
+@{
+    ViewBag.Title = "Edit Invoice";
+}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Edit Invoice</h2>
+                    <form method="post" autocomplete="off">
+                        <input type="hidden" asp-for="InvoiceId" />
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="InvoiceNumber" class="form-label fw-bold"></label>
+                                <input asp-for="InvoiceNumber" class="form-control" />
+                                <span asp-validation-for="InvoiceNumber" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="InvoiceDate" class="form-label fw-bold"></label>
+                                <input asp-for="InvoiceDate" type="date" class="form-control" />
+                                <span asp-validation-for="InvoiceDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="mb-1 d-flex align-items-center">
+                                    <label class="form-label fw-bold mb-0">Select Supplier</label>
+                                    <a href="/Supplier/Index" class="ms-2 btn btn-link p-0" title="Manage suppliers">Manage Supplier</a>
+                                </div>
+                                <select asp-for="SupplierId" asp-items="ViewBag.SupplierList" class="form-control">
+                                    <option value="">Select Supplier</option>
+                                </select>
+                                <span asp-validation-for="SupplierId" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-1 d-flex align-items-center">
+                                    <label class="form-label fw-bold mb-0">Select Customer</label>
+                                    <a href="/Customer/Index" class="ms-2 btn btn-link p-0" title="Manage customers">Manage Customer</a>
+                                </div>
+                                <select asp-for="CustomerId" asp-items="ViewBag.CustomerList" class="form-control">
+                                    <option value="">Select Customer</option>
+                                </select>
+                                <span asp-validation-for="CustomerId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Amount" class="form-label fw-bold">Invoice Amount</label>
+                                <input asp-for="Amount" class="form-control" type="number" min="0.01" step="0.01" />
+                                <span asp-validation-for="Amount" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="TaxRate" class="form-label fw-bold">Tax Rate (%)</label>
+                                <select asp-for="TaxRate" class="form-control" id="InvoiceTaxRate">
+                                    <option value="0.00">0%</option>
+                                    <option value="5.00">5%</option>
+                                    <option value="10.00">10%</option>
+                                    <option value="18.00">18%</option>
+                                </select>
+                                <span asp-validation-for="TaxRate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="TaxAmount" class="form-label fw-bold">Tax Amount</label>
+                                <input asp-for="TaxAmount" class="form-control bg-light" readonly />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="TotalAmount" class="form-label fw-bold">Total Amount</label>
+                                <input asp-for="TotalAmount" class="form-control bg-light" readonly />
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+                            <button type="submit" class="btn btn-success" title="Save changes to this invoice">Save Changes</button>
+                            <button type="button" class="btn btn-secondary" onclick="window.location.href='/Invoice/Index'" title="Cancel and return to invoice list">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/invoice.js"></script>
+}

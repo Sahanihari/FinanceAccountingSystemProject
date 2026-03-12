@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Customer>
+
+<div class="container">
+
+    <h3>Customers</h3>
+
+    <button class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#customerModal"
+            onclick="clearCustomerForm()"
+            title="Create a new customer">
+        Add Customer
+    </button>
+
+    <div class="table-responsive mt-3">
+        <table class="table table-bordered">
+
+            <thead>
+                <tr>
+
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Address</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>@item.Name</td>
+                        <td>@item.Email</td>
+                        <td>@item.ContactNumber</td>
+                        <td>
+                            @if (item.Address != null)
+                            {
+                                @($"{item.Address.Street}, {item.Address.City}, {item.Address.Country}")
+                            }
+                            else
+                            {
+                                <span class="text-muted">No Address</span>
+                            }
+                        </td>
+
+                        <td>
+
+                            <button class="btn btn-warning"
+                                    onclick="editCustomer(@item.CustomerId)"
+                                    title="Edit this customer">
+                                Edit
+                            </button>
+
+                            <form action="/Customer/Delete/@item.CustomerId" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-danger" title="Delete this customer" onclick="return confirm('Are you sure you want to delete this customer?');">Delete</button>
+                            </form>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+<partial name="_CustomerModal" /><partial name="_CustomerModal" />
